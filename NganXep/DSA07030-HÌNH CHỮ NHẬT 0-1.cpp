@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define mp make_pair
+#define fi first
+#define se second
+#define pb push_back
+#define sz size()
+#define ll long long
+#define FOR(i, a, b) for(int i = a; i <= b; i++)
+#define FORD(i, a, b) for(int i = a; i >= b; i--)
+#define F(i, a, b) for(int i = a; i < b; i++)
+#define FD(i, a, b) for(int i = a; i > b; i--)
+#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define vi vector<int>
+#define vll vector<ll>
+#define all(x) (x).begin(), (x).end()
+#define endl '\n'
+
+int sol(vector<int> a) {
+    int n = a.size() ; 
+    stack<int> st ; 
+    vector<int> l(n), r(n) ; 
+    for(int i = 0 ; i < n ; i++) {
+        while(!st.empty() && a[st.top()] >= a[i]) st.pop() ; 
+
+        if(st.empty()) l[i] = 0 ; 
+        else l[i] = st.top() + 1 ;
+
+        st.push(i) ; 
+    }
+    for(int i = n - 1 ; i >= 0 ; i--) {
+        while(!st.empty() && a[st.top()] > a[i]) st.pop() ; 
+
+        if(st.empty()) r[i] = n - 1 ;
+        else r[i] = st.top() - 1 ;
+
+        st.push(i) ; 
+    }
+
+    int ans = 0 ; 
+    for(int i = 0 ;i < n ; i++) {
+        ans = max(ans,a[i] * (r[i] - l[i] + 1)) ; 
+    }
+    return ans ;
+}
+
+void solve() {
+    int n, m ; 
+    cin >> n >> m ; 
+    vector<vector<int>> a(n, vector<int>(m)) ; 
+    for(int i = 0 ; i < n ; i++) {
+        for(int j = 0 ; j < m ;j++) {
+            cin >> a[i][j] ; 
+            if(a[i][j] == 1 && i > 0 && a[i-1][j] > 0) {
+                a[i][j] = a[i-1][j] + 1 ;
+            }
+        }
+    }
+    int ans = 0 ;
+    for(int i = 0 ; i < n ; i++) {
+        ans = max(ans,sol(a[i])) ; 
+    }
+    cout << ans << "\n" ;
+}
+
+int main() {
+    faster();
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
+    return 0;
+}

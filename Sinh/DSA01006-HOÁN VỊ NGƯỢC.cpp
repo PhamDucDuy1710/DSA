@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int a[100] = {0}, n;
+bool chuaXet[100];
+void result() {
+	for (int i = 1; i <= n; i++) {
+		cout << a[i] ; 
+	}
+	cout << " ";
+}
+
+void Try(int m) {
+	for (int i = n; i >=  1; i--) {
+		if (chuaXet[i]) {
+			chuaXet[i] = false;
+			a[m] = i;
+			if (m == n) result();
+			else Try(m + 1);
+			chuaXet[i] = true;
+		}
+	}
+}
+
+
+int main() {
+	int t ;
+	cin >> t ;
+	while(t--) {
+		memset(chuaXet, true, sizeof(chuaXet));
+		cin >> n;
+		Try(1);
+		cout << "\n" ; 
+	}
+}

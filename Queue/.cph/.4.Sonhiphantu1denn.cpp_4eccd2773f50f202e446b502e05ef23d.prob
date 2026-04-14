@@ -1,0 +1,1 @@
+{"name":"Local: 4","url":"c:\\Users\\Admin\\OneDrive\\Documents\\Code\\KiemtraDSA\\Queue\\4.Sonhiphantu1denn.cpp","tests":[{"id":1776004949227,"input":"2\n2\n5","output":"1 10\n1 10 11 100 101"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Admin\\OneDrive\\Documents\\Code\\KiemtraDSA\\Queue\\4.Sonhiphantu1denn.cpp","group":"local","local":true}

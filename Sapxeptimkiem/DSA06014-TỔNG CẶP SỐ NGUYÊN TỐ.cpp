@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std ; 
+int nt(int n) {
+	if(n < 2) return 0 ; 
+	for(int i = 2 ; i <= sqrt(n) ;i++) {
+		if(n % i == 0) {
+			return 0 ; 
+		}
+	}
+	return 1 ; 
+}
+void solve() {
+	int n ;
+	cin >> n ; 
+	bool ok = 0 ; 
+	for(int i = 2 ; i <= n/2 ; i++) {
+		if(nt(i) && nt(n-i)) {
+			ok = 1 ; 
+			cout << i << " " << n - i << "\n" ; 
+			break ; 
+		}
+	}
+	if(!ok) cout << "-1\n" ; 
+}
+int main() {
+	ios::sync_with_stdio(0) ; 
+	cin.tie(0) ; 
+	int t ;
+	cin >> t ;
+	while(t--) {
+		solve() ;
+	}
+}
