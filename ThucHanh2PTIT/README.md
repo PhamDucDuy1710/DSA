@@ -1,0 +1,2 @@
+THỰC HÀNH THẦY KIÊN NHÉ.
+CODE MÌNH CÓ MẤY BÀI SAI NHÉ. MÌNH KO NHỚ BÀI NÀO!
