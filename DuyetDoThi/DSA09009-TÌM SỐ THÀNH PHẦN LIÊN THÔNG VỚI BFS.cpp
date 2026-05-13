@@ -1,23 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std ;
 int a[1005][1005], lt[1005], n, e[1005], q[1005] ; 
+#include <queue>
+
 void BFS(int u) {
-	int v, dq = 1, cq = 0 ; 
-	cq++ ; 
-	q[cq] = u ; 
-	lt[u] = 1; 
-	while(dq <= cq) {
-		v = q[dq] ; 
-		dq++ ; 
-		for(int i = 1 ; i <= n ; i++) {
-			if(lt[i] == 0 && a[v][i] == 1) {
-				cq++ ; 
-				q[cq] = i ; 
-				lt[i] = 1 ; 
-				e[i] = v; 
-			}
-		}
-	}
+    queue<int> q;
+
+    q.push(u);
+    lt[u] = 1;
+
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop();
+
+        for(int i = 1; i <= n; i++) {
+            if(lt[i] == 0 && a[v][i] == 1) {
+                q.push(i);
+                lt[i] = 1;
+                e[i] = v;
+            }
+        }
+    }
 }
 int tpltBfs() { 
 	int k = 0 ; 

@@ -21,7 +21,7 @@ void Bfs(int u) {
 	}
 }
 void solve() {
-	int E, start ; 
+	int E, start  
 	cin >> n >> E >> start ; 
 	for(int i= 1;i <= n;i++) {
 		vs[i] = 0 ; 

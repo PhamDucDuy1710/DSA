@@ -1,81 +1,79 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h> 
 using namespace std;
 
-#define mp make_pair
-#define fi first
-#define se second
-#define pb push_back
-#define sz size()
-#define ll long long
-#define FOR(i, a, b) for(int i = a; i <= b; i++)
-#define FORD(i, a, b) for(int i = a; i >= b; i--)
-#define F(i, a, b) for(int i = a; i < b; i++)
-#define FD(i, a, b) for(int i = a; i > b; i--)
-#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-#define vi vector<int>
-#define vll vector<ll>
-#define all(x) (x).begin(), (x).end()
-#define endl '\n'
-
+int N, M;
 vector<int> adj[1005];
-bool vs[1005];
-int parent[1005];
+int par[1005];
+bool visited[1005];
 vector<int> cycle;
+bool found;
 
-bool dfs(int u, int par) {
-    vs[u] = true;
-    for(int v : adj[u]) {
-        if(!vs[v]) {
-            parent[v] = u;
-            if(dfs(v, u)) return true;
-        }
-        else if(v != par) {
-            int x = u;
-            cycle.push_back(v);
-            while(x != v) {
-                cycle.push_back(x);
-                x = parent[x];
+void dfs(int u, int p) {
+    if (found) return; 
+    visited[u] = true;
+    par[u] = p;
+
+    for (int v : adj[u]) {
+        if (v == p) continue; 
+        if (visited[v]) {
+            if (v == 1 && !found) {
+                found = true;
+                vector<int> path;
+                int temp = u;
+                while (temp != -1) {
+                    path.push_back(temp);
+                    temp = par[temp];
+                }
+                reverse(path.begin(), path.end());
+                path.push_back(1); 
+                cycle = path;
+                return;
             }
-            cycle.push_back(v);
-            return true;
+        } else {
+            dfs(v, u);
         }
+        if (found) return;
     }
-    return false;
 }
 
 void solve() {
-    int n, E;
-    cin >> n >> E;
-
-    for(int i = 1; i <= n; i++) {
+    cin >> N >> M;
+    for (int i = 1; i <= N; i++) {
         adj[i].clear();
-        vs[i] = false;
-        parent[i] = -1;
+        visited[i] = false;
+        par[i] = 0;
     }
+    found = false;
+    cycle.clear();
 
-    for(int i = 0; i < E; i++) {
+    for (int i = 0; i < M; i++) {
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
+    for (int i = 1; i <= N; i++) {
+        sort(adj[i].begin(), adj[i].end());
+    }
 
-    cycle.clear();
+    dfs(1, -1);
 
-    if(dfs(1, -1)) {
-        reverse(cycle.begin(), cycle.end());
-        for(int x : cycle) cout << x << " ";
-        cout << "\n";
+    if (found) {
+        for (int i = 0; i < cycle.size(); i++) {
+            cout << cycle[i] << (i == cycle.size() - 1 ? "" : " ");
+        }
+        cout << endl;
     } else {
-        cout << "NO\n";
+        cout << "NO" << endl;
     }
 }
 
 int main() {
-    faster();
-    int t;
-    cin >> t;
-    while(t--) {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int T;
+    cin >> T;
+    while (T--) {
         solve();
     }
     return 0;

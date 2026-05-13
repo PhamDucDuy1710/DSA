@@ -35,6 +35,7 @@ void solve() {
 		int u, v ; 
 		cin >> u >> v ;
 		a[u][v] = 1 ; 
+		a[v][u] = 1 ;
 	}
 	Bfs(start,endd) ; 
 	if(!vs[endd]) {

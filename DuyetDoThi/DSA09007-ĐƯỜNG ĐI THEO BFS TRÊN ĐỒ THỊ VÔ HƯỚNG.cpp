@@ -1,25 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std ; 
 int a[1005][1005], n, vs[1005], e[1005], q[1005] ; 
+#include <queue>
+
 void Bfs(int u, int target) {
-	int v ,dq = 1, cq = 0 ; 
-	cq++; 
-	q[cq] = u ; 
-	vs[u] = 1 ;  
-	e[u] = -1 ;  
-	while(dq <= cq) {
-		v = q[dq] ; 
-		dq++ ; 
-		if(v == target) return; 
-		for(int i =1 ; i <= n ;i++) {
-			if(vs[i] == 0 && a[v][i] == 1) {
-				cq++ ; 
-				q[cq] = i ; 
-				vs[i] = 1 ; 
-				e[i] = v ; 
-			}
-		}
-	}
+    queue<int> q;
+    q.push(u);
+    vs[u] = 1;
+    e[u] = -1;
+
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop();
+        if(v == target) return;
+        for(int i = 1; i <= n; i++) {
+            if(vs[i] == 0 && a[v][i] == 1) {
+				q.push(i) ;
+                vs[i] = 1;   
+                e[i] = v;
+            }
+        }
+    }
 }
 void solve() {
 	int E, start, endd ;
